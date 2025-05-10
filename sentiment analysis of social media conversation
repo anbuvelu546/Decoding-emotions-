@@ -1,0 +1,30 @@
+from textblob import TextBlob
+import pandas as pd
+
+# Sample data: Simulated social media posts
+posts = [
+    "I love the new features on the app! Great job!",
+    "This update ruined everything. So frustrating.",
+    "Meh, it's okay I guess. Not too bad, not great.",
+    "I’m extremely happy with the customer service today.",
+    "Worst experience ever. Never using this again!",
+    "Can someone help me with this issue? Feeling lost."
+]
+
+# Function to analyze sentiment
+def analyze_sentiment(text):
+    blob = TextBlob(text)
+    polarity = blob.sentiment.polarity
+    if polarity > 0:
+        return "Positive"
+    elif polarity < 0:
+        return "Negative"
+    else:
+        return "Neutral"
+
+# Create DataFrame
+df = pd.DataFrame(posts, columns=['Post'])
+df['Sentiment'] = df['Post'].apply(analyze_sentiment)
+
+# Display result
+print(df)
